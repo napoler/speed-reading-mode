@@ -25,13 +25,28 @@
 }
 #speed-read-center-text {
 
-    top: 50%;
+    bottom: 20%;
     left: 50%;
     position: absolute;
-    transform: translate(-50%,-50%);
-	line-height: 1.2em;
+    transform: translate(-50%,-10%);
+	line-height: 2.1em;
 	color: #fff;
-	font-size: 3.6em;
+    font-size: 2em;
+    height: auto;
+    overflow: hidden;
+}
+#speed-read-center-text .words:nth-last-child(2){
+/* #speed-read-center-text .words:last-child{ */
+    background: #a1fb6e;
+    /* display: inline-block; */
+    /* font-size: 1.1em; */
+    color: #333;
+    /* padding: 10px; */
+    /* border-radius: 10px; */
+}
+#speed-read-center-text  .words{
+    /* display: inline; */
+    /* font-size: 0.5em; */
 }
 #speed-read-time-remaining {
     font-family: 'Slabo 27px';

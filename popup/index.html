@@ -6,10 +6,19 @@
 	</head>
 	<body>
 		<form id="popup-form" class="browser-style">
+			<h2>开始快速阅读</h2>
 			<label for="wpm" class="browser-style-label">每分钟阅读多数字</label>
 			<div class="browser-style">
 				<input type="number" name="wpm" id="wpm" placeholder="Words per minute" value=1000>
 			</div>
+
+
+			<label for="fragment_length" class="browser-style-label">每段长度</label>
+			<div class="browser-style">
+				<input type="number" name="fragment_length" id="fragment_length" placeholder="Fragment length" value=7>
+			</div>
+
+
 			<label for="paragraph_end" class="browser-style-label">段落之间延迟 (ms)</label>
 			<div class="browser-style">
 				<input type="number" name="paragraph_end" id="paragraph_end" placeholder="Delay between paragraph (ms)" value=1000>

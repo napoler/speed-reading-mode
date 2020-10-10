@@ -1,7 +1,10 @@
+// 设置休眠时间
 const sleep = async function(time) {
 	return new Promise(resolve => setTimeout(resolve, time));
 };
 
+
+// 加载内容框架
 const insertContainer = function() {
 	let container = document.createElement('div');
 	container.id = 'speed-read-container';
@@ -39,6 +42,8 @@ const insertContainer = function() {
 	document.body.appendChild(container);
 };
 
+
+// 阅读控制主体
 class SpeedRead {
 	constructor(tokens, settings) {
 		this.tokens = tokens;
@@ -161,13 +166,14 @@ class SpeedRead {
 		return seconds + ' seconds left';
 	}
 }
-
+// 运行代码
 const run = async function(settings) {
     let articleContent = readability.grabArticle();
     articleContent = [...articleContent.childNodes[0].childNodes];
-
+    console.log("parseInt(settings.wpm)",parseInt(settings.wpm));
     const wait = {
-        WORD: 60000 / parseInt(settings.wpm),
+        WORD: 60000 / (parseInt(settings.wpm)/parseInt(settings.fragment_length)), //计算每段耗时   一分钟/每分钟多少字
+        fragment_length:parseInt(settings.fragment_length),
         PARAGRAPH_END: parseInt(settings.paragraph_end),
         IMAGE: parseInt(settings.image),
         ARTICLE_END: 1000,
@@ -191,24 +197,26 @@ const run = async function(settings) {
 
     speedRead.openContainer();
     while (!speedRead.isCancelled()) {
-        console.log("speedRead.tokens",speedRead.tokens)
+        //console.log("speedRead.tokens",speedRead.tokens)
     	const [val, type, delay] = speedRead.tokens[speedRead.counter];
     	timeRemaining.textContent = speedRead.getHumanReadableTimeRemaining();
-    	totalTokens.textContent = speedRead.totalTokens;
+    	totalTokens.textContent = "进度："+speedRead.totalTokens+"段";
         while (speedRead.isPaused()) {
             await sleep(500);
         }
         //console.log(speedRead.counter)
         console.log(val, type, delay)
     	switch (type) {
-    		case TokenName.WORD: //追加文字
-    			centerText.textContent = val;
+            case TokenName.WORD: //追加文字
+            
+                centerText.innerHTML = centerText.innerHTML +"<span class='words'>"+val+"</span>";
+                // centerText.textContent = val;
     			//centerText.innerHTML=centerText.innerHTML+"<div class='li'>"+val+"</div>";
     			//console.log(val)
     			await sleep(delay);
     			break;
             case TokenName.IMAGE:
-                centerText.innerHTML = `
+                centerText.textContent = `
                     <img src="${val.url}" class="speed-read-image" />
                     <p class="speed-read-image-caption">${val.caption}</p>
                 `;
@@ -219,7 +227,9 @@ const run = async function(settings) {
                 }
                 break;
     		case TokenName.PARAGRAPH_END:
+                centerText.innerHTML = centerText.innerHTML +"<div class='end'><hr></div>";
     		case TokenName.ARTICLE_END:
+                // centerText.innerHTML = centerText.innerHTML +"<div class='end'>文章结束！</div>";
     			await sleep(delay);
     			break;
     	}
@@ -228,8 +238,11 @@ const run = async function(settings) {
 
     document.removeEventListener('keyup', togglePauseIfSpacePressed);
 };
-
+// 执行加载内容框架
 insertContainer();
+// BrowserDetect.browser.runtime.onMessage.addListener(function(settings) {
+// 火狐监听
 browser.runtime.onMessage.addListener(function(settings) {
+    // 运行
 	run(settings);
 })

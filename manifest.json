@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "Speed Reading Mode",
+    "name": "速读",
     "version": "0.5",
-    "description": "Improve reading speed by removing distraction and the need to move our eyes",
+    "description": "一个可以高效阅读的工具",
     "icons": {
         "48": "icons/speed-reading-black-512.png"
     },

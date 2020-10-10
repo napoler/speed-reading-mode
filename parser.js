@@ -62,8 +62,8 @@ function cutArray(array, subLength) {
 
 
 const paragraphParserTerry = (node, wait) => {
-	//let temp = node.innerText.split(' ');
-	let temp =node.innerText.split(/[\n\s+,，；;?？。《》”“]/g); //中英文逗号 中英文分号 回车 空格分隔/切割字符串s
+	let temp = node.innerText.split(' ');
+//	let temp =node.innerText.split(/[\n\s+,，；;?？。《》”“]/g); //中英文逗号 中英文分号 回车 空格分隔/切割字符串s
 	var tokensVal =new Array();
 	
 	for (var i = 0; i < temp.length; i++) {
@@ -86,17 +86,17 @@ const paragraphParserTerry = (node, wait) => {
 		 
 		    console.log('该字符串是中文');
 		    console.log('中文切割',temp[i].split(''));
-		    console.log("tokensVal1",tokensVal);
+		   // console.log("tokensVal1",tokensVal);
 		    //tokensVal.concat(temp[i].split(''));
 		    tokensVal.push.apply(tokensVal, temp[i].split(''));
-		    console.log("tokensVal2",tokensVal);
+		    //console.log("tokensVal2",tokensVal);
 		 
 		}else{
 		//非中文字符串
 		     tokensVal.push(temp[i]," ");
 		
 		}
-		
+		tokensVal.push("</br>");
 		console.log("tokensVal",tokensVal);
 
  
@@ -107,11 +107,11 @@ const paragraphParserTerry = (node, wait) => {
 	
 	//const tokensVal = temp;
 	//对字符进行切片
-	tokensVal=cutArray(tokensVal,TokenName.WORD_NUM);
+	tokensVal=cutArray(tokensVal,wait.fragment_length);
 	console.log("new",tokensVal)
 	console.log("wait",wait)
 	const tokens = tokensVal.reduce(function(list, words) {
-		return [...list, [words, TokenName.WORD, wait.WORD*TokenName.WORD_NUM]]
+		return [...list, [words, TokenName.WORD, wait.WORD*wait.fragment_length]]
 	}, []);
 	const endToken = ['', TokenName.PARAGRAPH_END, wait.PARAGRAPH_END];
 	return [...tokens, endToken];
