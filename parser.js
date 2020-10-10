@@ -112,7 +112,7 @@ const paragraphParserTerry = (node, wait) => {
 	console.log("new",tokensVal)
 	console.log("wait",wait)
 	const tokens = tokensVal.reduce(function(list, words) {
-		return [...list, [words, TokenName.WORD, wait.WORD*wait.fragment_length]]
+		return [...list, [words, TokenName.WORD, wait.WORD]]
 	}, []);
 	const endToken = ['', TokenName.PARAGRAPH_END, wait.PARAGRAPH_END];
 	return [...tokens, endToken];

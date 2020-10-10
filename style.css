@@ -28,7 +28,7 @@
     bottom: 20%;
     left: 50%;
     position: absolute;
-    transform: translate(-50%,-10%);
+    transform: translate(-50%,0);
 	line-height: 2.1em;
 	color: #fff;
     font-size: 2em;
@@ -56,6 +56,9 @@
     vertical-align: middle;
     font-weight: bold;
     margin-left: 1em;
+}
+.end {
+    padding: 20px;
 }
 .speed-read-nav {
  

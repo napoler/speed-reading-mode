@@ -200,7 +200,8 @@ const run = async function(settings) {
         //console.log("speedRead.tokens",speedRead.tokens)
     	const [val, type, delay] = speedRead.tokens[speedRead.counter];
     	timeRemaining.textContent = speedRead.getHumanReadableTimeRemaining();
-    	totalTokens.textContent = "进度："+speedRead.totalTokens+"段";
+        totalTokens.textContent = "进度："+speedRead.totalTokens+"段";
+        
         while (speedRead.isPaused()) {
             await sleep(500);
         }
