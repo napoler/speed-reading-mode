@@ -201,8 +201,9 @@ const run = async function(settings) {
         //console.log(speedRead.counter)
         console.log(val, type, delay)
     	switch (type) {
-    		case TokenName.WORD:
+    		case TokenName.WORD: //追加文字
     			centerText.textContent = val;
+    			//centerText.innerHTML=centerText.innerHTML+"<div class='li'>"+val+"</div>";
     			//console.log(val)
     			await sleep(delay);
     			break;

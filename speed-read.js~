@@ -173,7 +173,8 @@ const run = async function(settings) {
         ARTICLE_END: 1000,
     };
     console.log("articleContent",articleContent);
-    const tokens = parseArticle(articleContent, wait);
+ //   const tokens = parseArticle(articleContent, wait);
+    const tokens = parseArticleTerry(articleContent, wait);
     console.log("tokens",tokens)
     const speedRead = new SpeedRead(tokens, settings);
 
@@ -200,8 +201,9 @@ const run = async function(settings) {
         //console.log(speedRead.counter)
         console.log(val, type, delay)
     	switch (type) {
-    		case TokenName.WORD:
-    			centerText.textContent = val;
+    		case TokenName.WORD: //追加文字
+    			//centerText.textContent = val;
+    			centerText.innerHTML=centerText.innerHTML+"<div class='li'>"+val+"</div>";
     			//console.log(val)
     			await sleep(delay);
     			break;

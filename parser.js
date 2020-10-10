@@ -3,6 +3,8 @@ const TokenName = {
 	PARAGRAPH_END: 1,
 	ARTICLE_END: 2,
 	IMAGE: 3,
+	WORD_NUM:7, //每次显示的字数
+	
 };
 
 const paragraphParser = (node, wait) => {
@@ -91,7 +93,7 @@ const paragraphParserTerry = (node, wait) => {
 		 
 		}else{
 		//非中文字符串
-		     tokensVal.push(temp[i]);
+		     tokensVal.push(temp[i]," ");
 		
 		}
 		
@@ -102,13 +104,14 @@ const paragraphParserTerry = (node, wait) => {
 	}
 	
 	}
-
-	//const tokensVal = temp;
 	
-	tokensVal=cutArray(tokensVal,4);
+	//const tokensVal = temp;
+	//对字符进行切片
+	tokensVal=cutArray(tokensVal,TokenName.WORD_NUM);
 	console.log("new",tokensVal)
-	const tokens = tokensVal.reduce(function(list, word) {
-		return [...list, [word, TokenName.WORD, wait.WORD]]
+	console.log("wait",wait)
+	const tokens = tokensVal.reduce(function(list, words) {
+		return [...list, [words, TokenName.WORD, wait.WORD*TokenName.WORD_NUM]]
 	}, []);
 	const endToken = ['', TokenName.PARAGRAPH_END, wait.PARAGRAPH_END];
 	return [...tokens, endToken];
