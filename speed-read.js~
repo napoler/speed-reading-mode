@@ -173,8 +173,7 @@ const run = async function(settings) {
         ARTICLE_END: 1000,
     };
     console.log("articleContent",articleContent);
- //   const tokens = parseArticle(articleContent, wait);
-    const tokens = parseArticleTerry(articleContent, wait);
+    const tokens = parseArticle(articleContent, wait);
     console.log("tokens",tokens)
     const speedRead = new SpeedRead(tokens, settings);
 

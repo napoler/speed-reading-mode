@@ -53,7 +53,7 @@ function cutArray(array, subLength) {
     let index = 0;
     let newArr = [];
     while(index < array.length) {
-        newArr.push(array.slice(index, index += subLength).join(""));
+        newArr.push(array.slice(index, index += subLength).join());
     }
     return newArr;
 }
