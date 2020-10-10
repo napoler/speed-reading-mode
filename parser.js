@@ -62,7 +62,8 @@ function cutArray(array, subLength) {
 
 
 const paragraphParserTerry = (node, wait) => {
-	let temp = node.innerText.split(' ');
+	let temp = [node.innerText]; //不做段落处理
+	// let temp = node.innerText.split(' ');
 //	let temp =node.innerText.split(/[\n\s+,，；;?？。《》”“]/g); //中英文逗号 中英文分号 回车 空格分隔/切割字符串s
 	var tokensVal =new Array();
 	
