@@ -196,15 +196,17 @@ const run = async function(settings) {
     document.addEventListener('keyup', togglePauseIfSpacePressed);
 
     speedRead.openContainer();
+    let run_num=0;
     while (!speedRead.isCancelled()) {
         //console.log("speedRead.tokens",speedRead.tokens)
     	const [val, type, delay] = speedRead.tokens[speedRead.counter];
-    	timeRemaining.textContent = speedRead.getHumanReadableTimeRemaining();
-        totalTokens.textContent = "进度："+speedRead.totalTokens+"段";
+        timeRemaining.textContent = speedRead.getHumanReadableTimeRemaining();
+        totalTokens.textContent = "// 进度："+(run_num/speedRead.totalTokens*100).toFixed(2)+"%";
         
         while (speedRead.isPaused()) {
             await sleep(500);
         }
+
         //console.log(speedRead.counter)
         console.log(val, type, delay)
     	switch (type) {
@@ -233,7 +235,8 @@ const run = async function(settings) {
                 // centerText.innerHTML = centerText.innerHTML +"<div class='end'>文章结束！</div>";
     			await sleep(delay);
     			break;
-    	}
+        }
+        run_num++;
     	speedRead.increment();
     }
 
